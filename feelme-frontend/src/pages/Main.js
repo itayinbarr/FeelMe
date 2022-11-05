@@ -8,13 +8,6 @@ import BlockComponent from '../components/BlockComponent';
 
 
 function Main() {
-  const [currentTime, setCurrentTime] = useState(0);
-
-  useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    });
-  }, []);
 
   return (
     // Main Page Layout
@@ -39,13 +32,13 @@ function Main() {
           </Row>
           <Row className="rowSpace">
             <Col className="block" lg="4">
-              <BlockComponent title="Image Feeling Recognition" description="" type="action" />
+              <BlockComponent title="Image Feeling Recognition" description="" type="emotion" />
             </Col>
             <Col className="block" lg="4">
-              <BlockComponent title="Face Verification" description="" type="action" />
+              <BlockComponent title="Comparing Faces" description="" type="faceVerification" />
             </Col>
             <Col className="block" lg="4">
-              <BlockComponent title="Real Time Feeling Recognition" description="" type="action" />
+              <BlockComponent title="Real Time Feeling Recognition" description="" type="realtime" />
             </Col>
           </Row>
           <Row className="rowSpace">

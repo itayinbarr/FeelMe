@@ -4,26 +4,12 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './BlockComponent.css'
-import Nav from 'react-bootstrap/Nav';
+import FaceCompare from './FaceCompare';
+import EmotionRecognition from './EmotionRecognition';
+import RealTimeEmotion from './RealTimeEmotion';
 
 function BlockComponent(props) {
-    const menu = ['Home', 'Seetings']
-    const [filename, setFilename] = useState("")
-    const inputRef = useRef(null);
-    const pic1Click = () => {
-        // 👇️ open file input box on click of other element
-        inputRef.current.click();
-      };
-    
-      const handlePic1Change = event => {
-        const fileObj = event.target.files && event.target.files[0];
-        if (!fileObj) {
-          return;
-        }
-        event.target.value = null;
-        setFilename(fileObj.name)
-    }
-
+    const menu = ['Home', 'Settings']
 
     return (
         <Card border="light" className="cardContainer">
@@ -39,37 +25,24 @@ function BlockComponent(props) {
                     }
                     {
                         // Adding Buttons by type
-                        // menu type
-                        (props.type == "action") ? (
-                                <Row className="menuRow">
-                                    <Col>
-                                    <input
-                                        style={{display: 'none'}}
-                                        ref={inputRef}
-                                        type="file"
-                                        onChange={handlePic1Change}
-                                    />
-                                        <Button variant="light" onClick={pic1Click}>pic1</Button>
-                                    </Col>
-                                    <Col>
-                                        <input
-                                        style={{display: 'none'}}
-                                        ref={inputRef}
-                                        type="file"
-                                        onChange={handlePic1Change}
-                                        />
-                                        <Button variant="light" onClick={()=>alert(filename)}>pic2</Button>
-                                    </Col>
-                                </Row>
-                            
+                        // face compare type
+                        (props.type == "faceVerification") ? (
+                            <FaceCompare />    
                         ):("")
                     }
                     {
-                    // action type
-                    (props.type == "action") ? (          
-                        <Button variant="link">Go</Button>
-                    ):("")
-                }
+                        //  emotion type
+                        props.type == 'emotion'? (
+                            <EmotionRecognition />
+                        ):
+                        ("")
+                    }
+
+                    {
+                        props.type == 'realtime'? (
+                            <RealTimeEmotion />
+                        ):("")
+                    }
                 </Card.Text>
                 {
                     // Adding Buttons by type
@@ -91,12 +64,6 @@ function BlockComponent(props) {
                         <Button variant="outline-primary">Learn more</Button>
                     ):("")
                     }
-                    {
-                    // action type
-                    (props.type == "action") ? (          
-                        <Button variant="link">Go</Button>
-                    ):("")
-                }
             </Card.Body>
         </Card>
     );
