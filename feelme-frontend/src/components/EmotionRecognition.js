@@ -35,17 +35,15 @@ function EmotionRecognition(props) {
         body: JSON.stringify(selectedFiles)
         }).then(res => res.json()).then(data => {
             if(data){
-                alert(JSON.stringify(data.result))
+                props.feelings(data.result)
             }
             else {
             }
         });
-
     }
 
-
-    return (<>
-                <Row className="menuRow text-center">
+    return (<Col>
+                <Row className="menuRow">
                     <Col>
                     <input
                         style={{display: 'none'}}
@@ -53,15 +51,15 @@ function EmotionRecognition(props) {
                         type="file"
                         onChange={handlePic1Change}
                     />
-                        <Button variant="light" onClick={pic1Click}>Picture 1</Button>
+                        <Button variant="light" onClick={pic1Click}>Load Picture</Button>
                     </Col>
                 </Row>
-                <Row className="menuRow text-center">
+                <Row className="menuRow">
                     <Col>
                         <Button variant='outline-primary' onClick={handleSubmit}>Analyze</Button>
                     </Col>
                 </Row>
-            </>
+            </Col>
                          
     );
   }

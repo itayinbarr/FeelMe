@@ -5,17 +5,28 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import BlockComponent from '../components/BlockComponent';
+import profilePic from '../assets/profile.jpg';
+import introPic from '../assets/intro.jpg';
+import verifyPic from '../assets/verify.jpg';
+import emotionPic from '../assets/emotion.jpg';
+import { Button } from 'react-bootstrap';
 
 
 function Main() {
-
+  // Getting data to different component
+  const [feelings, setFeelings] = useState({})
+  function handleFeelings (value) {
+      setFeelings(value);
+  }
   return (
     // Main Page Layout
     <Container className="rowSpace pageContainer">
       <Row className="rowSpace">
-        <Col className="block" xs="12" lg="3">
-          <h3>logo</h3>
+        <Col className="block cardContainer logoContainer" xs="12" lg="3">
+          <img src={introPic} className="d-inline mr-2 mt-4 logoPic"></img>
+          <h3 className='d-inline align-middle'>FeelMe</h3>
         </Col>
+     
       </Row>
       <Row className="rowSpace menu">
         <Col className="block menu" lg="3">
@@ -24,31 +35,28 @@ function Main() {
         <Col lg="9">
           <Row>
             <Col className="block" lg="8">
-            <BlockComponent title="Introduction" description="" type="intro" />
+            <BlockComponent title="Introduction" url={introPic} description="FeelMe is an AI based platform designed to answer your human questions. It was created to 
+            gain insights on human interactions, for learning and self reflection." type="intro" />
             </Col>
             <Col className="block" lg="4">
-            <BlockComponent title="Profile" description="" type="info" />
+            <BlockComponent title="Good Morning" description="Welcome back, Itay." url={profilePic} type="profile" />
             </Col>
           </Row>
           <Row className="rowSpace">
-            <Col className="block" lg="4">
-              <BlockComponent title="Image Feeling Recognition" description="" type="emotion" />
-            </Col>
-            <Col className="block" lg="4">
-              <BlockComponent title="Comparing Faces" description="" type="faceVerification" />
-            </Col>
-            <Col className="block" lg="4">
-              <BlockComponent title="Real Time Feeling Recognition" description="" type="realtime" />
+            <Col className="block">
+              <BlockComponent title="Image Feeling Recognition" feelings={handleFeelings} url={emotionPic} description="Emotion analysis of a picture." type="emotion" />
             </Col>
           </Row>
           <Row className="rowSpace">
-            <Col lg="6">
-              <BlockComponent title="Data" description="" />
-            </Col>
-            <Col lg="6">
-              <BlockComponent title="Data" description="" />
+            <Col className="block">
+              <BlockComponent title="Comparing Faces" url={verifyPic} description="Make sure you know who that one person you saw is." type="faceVerification" />
             </Col>
           </Row>
+        </Col>
+      </Row>
+      <Row className="rowSpace">
+        <Col className="mb-4">
+          <BlockComponent title="" description={""}/>
         </Col>
       </Row>
     </Container>

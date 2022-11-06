@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import './BlockComponent.css'
 
 function FaceCompare(props) {
-    const menu = ['Home', 'Settings']
     const [pic1, setPic1] = useState("")
     const [pic2, setPic2] = useState("")
     const inputRef1 = useRef(null);
@@ -50,19 +49,14 @@ function FaceCompare(props) {
         },
         body: JSON.stringify(selectedFiles)
         }).then(res => res.json()).then(data => {
-            if(data.result){
-                alert("They are the same");
-            }
-            else {
-                alert("Not the same")
-            }
+                props.compare({result:data.verified, similar: data.distance, different: 0.2- data.distance})
         });
 
     }
 
 
-    return (<>
-                <Row className="menuRow text-center">
+    return (<Col>
+                <Row className="menuRow">
                     <Col>
                     <input
                         style={{display: 'none'}}
@@ -71,23 +65,22 @@ function FaceCompare(props) {
                         onChange={handlePic1Change}
                     />
                         <Button variant="light" onClick={pic1Click}>Picture 1</Button>
-                    </Col>
-                    <Col>
                         <input
                         style={{display: 'none'}}
                         ref={inputRef2}
                         type="file"
                         onChange={handlePic2Change}
                         />
-                        <Button variant="light" onClick={pic2Click}>Picture 2</Button>
+                        <Button variant="light" className="ml-1" onClick={pic2Click}>Picture 2</Button>
                     </Col>
+                   
                 </Row>
-                <Row className="menuRow text-center">
+                <Row className="menuRow">
                     <Col>
                         <Button variant='outline-primary' onClick={handleSubmit}>Compare</Button>
                     </Col>
                 </Row>
-            </>
+            </Col>
                          
     );
   }
