@@ -13,12 +13,14 @@ function VerifiedComponent(props) {
         label: '# of Votes',
         data: [props.data.similar, props.data.different],
         backgroundColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)'
+          '#16c2d5',
+          '#89dee2',
+          
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)'
+          '#16c2d5',
+          '#89dee2',
+          
         ],
         borderWidth: 1,
       },
