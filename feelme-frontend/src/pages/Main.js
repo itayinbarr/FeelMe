@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import "./Main.css";
-// Bootstrap Imports
+// Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+// Components
 import BlockComponent from '../components/BlockComponent';
+// CSS and graphics
+import "./Main.css";
 import profilePic from '../assets/profile.jpg';
 import introPic from '../assets/intro.jpg';
 import verifyPic from '../assets/verify.jpg';
 import emotionPic from '../assets/emotion.jpg';
-import { Button } from 'react-bootstrap';
-
 
 function Main() {
   // Getting data to different component

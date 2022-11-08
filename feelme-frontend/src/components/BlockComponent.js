@@ -1,22 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
+// Bootstrap
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+// CSS and graphics
 import './BlockComponent.css'
+// Components
 import FaceCompare from './FaceCompare';
 import EmotionRecognition from './EmotionRecognition';
 import DoughnutComponent from './DoughnutComponent';
 import VerifiedComponent from './VerifiedComponent';
-function BlockComponent(props) {
-    const menu = ['Home', 'About', 'Feeling Recognition', 'Comparing Faces', 'Settings']
 
-    // Passing data to different component
+function BlockComponent(props) {
+    // Menu items
+    const menu = ['Home', 'Feeling Recognition', 'Comparing Faces']
+    // Handling and passing data to different components
     const [feelings, setFeelings] = useState({});
     const [renderFeelings, setRenderFeelings] = useState(false)
     const [compare, setCompare] = useState({});
     const [renderCompare, setRenderCompare] = useState(false)
-
     useEffect(()=>{
         if(Object.keys(feelings).length !== 0) {
             setRenderFeelings(true)
@@ -32,17 +35,18 @@ function BlockComponent(props) {
     function handleCompare (value) {
         setCompare({result:value.result, similar:value.similar, different:value.different});
     }
+
     return (
         <Card border="light" className={props.type == "menu" ? ("cardContainer menu"):('cardContainer')}>
             <Row>
                 <Col lg={renderFeelings||renderCompare?(6):(12)}>
-                <Card.Body>
-                            <Row>
-                                <Col>
-                                    <img className='profilePic' src={props.url}></img>
-                                </Col>
-                            </Row>                        
-                <Card.Title>{props.title}</Card.Title>
+                    <Card.Body>
+                        <Row>
+                            <Col>
+                                <img className='profilePic' src={props.url}></img>
+                            </Col>
+                        </Row>                        
+                    <Card.Title>{props.title}</Card.Title>
                     {
                         <Row>
                             <Col>
@@ -64,8 +68,7 @@ function BlockComponent(props) {
                         ):
                         ("")
                     }
-                   
-                {
+                    {
                     // Adding Buttons by type
                     // menu type
                     (props.type == "menu") ? (
@@ -78,29 +81,23 @@ function BlockComponent(props) {
                             </Row>
                             )                        
                         })
-                    ):("")}
-                    {
-                    // intro type
-                    (props.type == "intro") ? (
-                        <Button variant="outline-primary" className="rowSpace">Learn more</Button>
                     ):("")
-                    }
-                    
-            </Card.Body>
+                    }       
+                    </Card.Body>
                 </Col>
                 <Col lg="6">
                     {   
-                    renderFeelings ?
-                        <Col className="mt-4" lg="9">
-                            <DoughnutComponent data={feelings} />
-                        </Col>:""
+                        renderFeelings ?
+                            <Col className="mt-4" lg="9">
+                                <DoughnutComponent data={feelings} />
+                            </Col>:""
                     }
                     {
                         renderCompare ? 
                             <Col className="mt-4 mb-4" lg="9">
-                                    <h3>{(compare.result)?(<p>Same Person</p>):(<p>Not the same person</p>)}</h3>
-                                <VerifiedComponent data={compare} /></Col>:""
-                            
+                                <h3>{(compare.result)?(<p>Same Person</p>):(<p>Not the same person</p>)}</h3>
+                                <VerifiedComponent data={compare} />
+                            </Col>:""
                     }
                 </Col>
             </Row>
